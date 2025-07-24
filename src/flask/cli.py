@@ -601,15 +601,7 @@ class FlaskGroup(AppGroup):
         if self._loaded_plugin_commands:
             return
 
-        if sys.version_info >= (3, 10):
-            from importlib import metadata
-        else:
-            # Use a backport on Python < 3.10. We technically have
-            # importlib.metadata on 3.8+, but the API changed in 3.10,
-            # so use the backport for consistency.
-            import importlib_metadata as metadata  # pyright: ignore
-
-        for ep in metadata.entry_points(group="flask.commands"):
+        for ep in importlib.metadata.entry_points(group="flask.commands"):
             self.add_command(ep.load(), ep.name)
 
         self._loaded_plugin_commands = True
@@ -684,7 +676,9 @@ class FlaskGroup(AppGroup):
         return super().make_context(info_name, args, parent=parent, **extra)
 
     def parse_args(self, ctx: click.Context, args: list[str]) -> list[str]:
-        if not args and self.no_args_is_help:
+        if (not args and self.no_args_is_help) or (
+            len(args) == 1 and args[0] in self.get_help_option_names(ctx)
+        ):
             # Attempt to load --env-file and --app early in case they
             # were given as env vars. Otherwise no_args_is_help will not
             # see commands from app.cli.

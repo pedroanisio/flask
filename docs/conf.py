@@ -26,6 +26,7 @@ autodoc_preserve_defaults = True
 extlinks = {
     "issue": ("https://github.com/pallets/flask/issues/%s", "#%s"),
     "pr": ("https://github.com/pallets/flask/pull/%s", "#%s"),
+    "ghsa": ("https://github.com/pallets/flask/security/advisories/GHSA-%s", "GHSA-%s"),
 }
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
@@ -57,8 +58,8 @@ html_sidebars = {
 }
 singlehtml_sidebars = {"index": ["project.html", "localtoc.html", "ethicalads.html"]}
 html_static_path = ["_static"]
-html_favicon = "_static/shortcut-icon.png"
-html_logo = "_static/flask-vertical.png"
+html_favicon = "_static/flask-icon.svg"
+html_logo = "_static/flask-logo.svg"
 html_title = f"Flask Documentation ({version})"
 html_show_sourcelink = False
 

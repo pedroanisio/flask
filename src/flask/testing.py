@@ -58,9 +58,9 @@ class EnvironBuilder(werkzeug.test.EnvironBuilder):
     ) -> None:
         assert not (base_url or subdomain or url_scheme) or (
             base_url is not None
-        ) != bool(
-            subdomain or url_scheme
-        ), 'Cannot pass "subdomain" or "url_scheme" with "base_url".'
+        ) != bool(subdomain or url_scheme), (
+            'Cannot pass "subdomain" or "url_scheme" with "base_url".'
+        )
 
         if base_url is None:
             http_host = app.config.get("SERVER_NAME") or "localhost"
@@ -85,7 +85,7 @@ class EnvironBuilder(werkzeug.test.EnvironBuilder):
         self.app = app
         super().__init__(path, base_url, *args, **kwargs)
 
-    def json_dumps(self, obj: t.Any, **kwargs: t.Any) -> str:  # type: ignore
+    def json_dumps(self, obj: t.Any, **kwargs: t.Any) -> str:
         """Serialize ``obj`` to a JSON-formatted string.
 
         The serialization will be configured according to the config associated

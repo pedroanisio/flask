@@ -3,15 +3,23 @@ Version 3.2.0
 
 Unreleased
 
+-   Drop support for Python 3.9. :pr:`5730`
 -   Remove previously deprecated code: ``__version__``. :pr:`5648`
 
 
 Version 3.1.1
 -------------
 
-Unreleased
+Released 2025-05-13
 
--   Fix type hint for `cli_runner.invoke`. :issue:`5645`
+-   Fix signing key selection order when key rotation is enabled via
+    ``SECRET_KEY_FALLBACKS``. :ghsa:`4grg-w6v8-c28g`
+-   Fix type hint for ``cli_runner.invoke``. :issue:`5645`
+-   ``flask --help`` loads the app and plugins first to make sure all commands
+    are shown. :issue:`5673`
+-   Mark sans-io base class as being able to handle views that return
+    ``AsyncIterable``. This is not accurate for Flask, but makes typing easier
+    for Quart. :pr:`5659`
 
 
 Version 3.1.0
@@ -113,6 +121,7 @@ Released 2023-05-01
 
 -   Set ``Vary: Cookie`` header when the session is accessed, modified, or refreshed.
 -   Update Werkzeug requirement to >=2.3.3 to apply recent bug fixes.
+    :ghsa:`m2qf-hxjv-5gpq`
 
 
 Version 2.3.1
